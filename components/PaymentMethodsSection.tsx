@@ -12,7 +12,7 @@ export default function PaymentMethodsSection() {
   return (
     <section id="payments" className="py-12 bg-white">
       <div className="container mx-auto px-4">
-        <h3 className="text-center text-gray-500 font-semibold mb-8 text-lg">We Accept</h3>
+        <h3 className="text-center text-secondary font-semibold mb-8 text-lg">We Accept</h3>
         <div className="flex flex-wrap justify-center items-center gap-8">
           {payments.map((p, idx) => (
             <div key={idx} className="flex items-center justify-center h-12">

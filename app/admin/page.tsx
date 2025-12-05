@@ -4,7 +4,10 @@ import { useState, useEffect,useCallback } from 'react';
 import Link from 'next/link';
 import AdminLogin from './AdminLogin.jsx';
 import AdminDashboard from './AdminDashboard.jsx';
+import TopHeader from '@/components/TopHeader.jsx';
 import  supabase  from '@/lib/supabaseClient.js';
+import brand from '@/public/assets/brandG.png';
+import Image from 'next/image.js';
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -70,26 +73,26 @@ export default function AdminPage() {
   // Render the admin page
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                <i className="ri-truck-line text-white text-xl"></i>
-              </div>
-              <h1 className="text-2xl font-bold text-slate-800" style={{fontFamily: "Roboto, serif"}}>PENNY<span style={{color: '#fb923c'}}>WISE</span></h1>
-            </Link>
-            <span className="text-gray-600 font-medium">Admin Portal</span>
+    <>
+      <TopHeader/>
+      <div className="min-h-screen bg-gray-50">
+        <header className="bg-white shadow-sm border-b">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <Link href="/" className="flex items-center space-x-2 cursor-pointer">
+                <Image src={brand} alt="Shipwide Logistics" style={{objectFit: "contain", height: "100px", width: "100px"}} />
+              </Link>
+              <span className="text-secondary font-medium">Admin Portal</span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {!isAuthenticated ? (
-        <AdminLogin onLogin={handleLogin} />
-      ) : (
-          <AdminDashboard onLogout={handleLogout} />
-      )}
-    </div>
+        {!isAuthenticated ? (
+          <AdminLogin onLogin={handleLogin} />
+        ) : (
+            <AdminDashboard onLogout={handleLogout} />
+        )}
+      </div>
+    </>
   );
 }

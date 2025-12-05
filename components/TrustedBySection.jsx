@@ -13,7 +13,7 @@ export default function TrustedBySection() {
   return (
     <section id="trusted" className="py-12 bg-slate-100">
       <div className="container mx-auto px-4">
-        <h3 className="text-center text-gray-500 font-semibold mb-8 text-lg">Trusted By Leading Companies</h3>
+        <h3 className="text-center text-secondary font-semibold mb-8 text-lg">Trusted By Leading Companies</h3>
         <div className="flex flex-wrap justify-center items-center gap-8">
           {partners.map((partner, idx) => (
             <div key={idx} className="flex items-center justify-center h-16">

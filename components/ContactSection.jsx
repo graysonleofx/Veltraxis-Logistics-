@@ -1,66 +1,66 @@
-'use client';
-
+// React Contact Form Component
 import { useState } from 'react';
-import {sendContactNotification} from '@/lib/sendContact'
 
-export default function ContactSection() {
+const ContactSection = () => {
+
+  // useEffect(() =>{
+  //   console.log('Publick API URL:', process.env.NEXT_PUBLIC_API_URL)
+  // }, [])
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
-  const handleInputChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitStatus('Sending...')
-    setIsSubmitting(true);
+    setSubmitStatus('Sending...');
+    setLoading(true);
 
-    const formDetails = {...formData}
-
-    const result = await sendContactNotification(formDetails)
-    if(result?.success){
-      setSubmitStatus('Message sent Successfully')
-      alert('Message Sent Successfully')
-    }else {
-      setSubmitStatus('Failed to send message')
-      alert('Failed to send message')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({name: formData.name, email: formData.email, phone: formData.phone, subject: formData.subject, message: formData.message }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSubmitStatus('Message sent successfully');
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: ""
+        });
+      } else {
+        setSubmitStatus('Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('Failed to send message');
+    } finally {
+      setLoading(false);
     }
-    setIsSubmitting(false)
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
-    
-  //   setTimeout(() => {
-  //     setSubmitStatus('success');
-  //     setIsSubmitting(false);
-  //     setFormData({
-  //       name: '',
-  //       email: '',
-  //       phone: '',
-  //       subject: '',
-  //       message: ''
-  //     });
-      
-  //     setTimeout(() => {
-  //       setSubmitStatus('');
-  //     }, 3000);
-  //   }, 1000);
-  // };
 
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-orange-500 font-semibold text-lg mb-4 block">Contact Us</span>
+          <span className="text-secondary font-semibold text-lg mb-4 block">Contact Us</span>
           <h2 className="text-4xl font-bold text-slate-800 mb-4">
             Get In Touch With Us
           </h2>
@@ -82,7 +82,7 @@ export default function ContactSection() {
               </div>
             )}
 
-            <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
@@ -90,7 +90,7 @@ export default function ContactSection() {
                     type="text"
                     name="name"
                     value={formData.name}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
                     placeholder="John Doe"
@@ -102,7 +102,7 @@ export default function ContactSection() {
                     type="email"
                     name="email"
                     value={formData.email}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
                     placeholder="john@example.com"
@@ -117,7 +117,7 @@ export default function ContactSection() {
                     type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
                     placeholder="+1 (555) 000-0000"
                   />
@@ -128,7 +128,7 @@ export default function ContactSection() {
                     type="text"
                     name="subject"
                     value={formData.subject}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
                     placeholder="Shipping Inquiry"
@@ -141,7 +141,7 @@ export default function ContactSection() {
                 <textarea
                   name="message"
                   value={formData.message}
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   required
                   maxLength={500}
                   rows={5}
@@ -153,20 +153,10 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
-              >
-                {isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <i className="ri-loader-4-line animate-spin mr-2"></i>
-                    Sending...
-                  </div>
-                ) : (
-                  'Send Message'
-                )}
+              <button type="submit" disabled={loading} className={`w-full p-3 bg-secondary text-white font-semibold rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                {loading ? 'Sending...' : 'Send Message'} 
               </button>
+              {submitStatus && <p className="text-center text-sm text-gray-600 mt-4">{submitStatus}</p>}
             </form>
           </div>
 
@@ -175,41 +165,49 @@ export default function ContactSection() {
             
             <div className="space-y-6 mb-8">
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-map-pin-line text-orange-500 text-xl"></i>
+                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-map-pin-line text-secondary text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Our Address</h4>
-                  <h4 className="font-semibold text-slate-800 mb-1">Pennywise Logistics LLC</h4>
-                  <p className="text-gray-600">10685-B Hazelhurst Dr. Houston, Tx 77043 United State</p>
+                  <h4 className="font-semibold text-slate-800 mb-1">Ship wide Logistics LLC</h4>
+                  <p className="text-gray-600">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-phone-line text-orange-500 text-xl"></i>
+              {/* <div className="flex items-start">
+                <div className="w-12 h-12  bg-secondary/10  rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-phone-line text-secondary text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Phone Number</h4>
-                  <p className="text-gray-600">+1 704 677-4835</p>
-                  {/* <p className="text-gray-600">+1 (555) 123-4567</p> */}
+                  <p className="text-gray-600">+1 704 000-0000</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-mail-line text-orange-500 text-xl"></i>
+                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-mail-line text-secondary text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Email Address</h4>
-                  <p className="text-gray-600">contact@pennywiselogistics.online</p>
-                  {/* <p className="text-gray-600">contactus@pannywiselogistics.online</p> */}
+                  <p className="text-gray-600">contact-us@shipwidelogistics.online</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-time-line text-orange-500 text-xl"></i>
+                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-whatsapp-line text-secondary text-xl"></i>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-slate-800 mb-1">WhatsApp</h4>
+                  <p className="text-gray-600">+1 (682) 261-8986</p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-time-line text-secondary text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Business Hours</h4>
@@ -219,14 +217,23 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h4 className="font-semibold text-slate-800 mb-4">Emergency Contact</h4>
-              <p className="text-gray-600 mb-2">24/7 Support for urgent shipments</p>
-              <p className="text-orange-600 font-semibold text-lg">+1 704 677-4835</p>
+            <div className="bg-secondary/10 rounded-lg p-6">
+              <h4 className="font-semibold text-secondary mb-4">Emergency Contact</h4>
+              <p className="text-gray-800 mb-2">24/7 Support for urgent shipments</p>
+              
+              <p className="text-background font-semibold text-lg">
+                <i className="ri-whatsapp-line text-background text-xl mr-2"></i>
+               +1 (682) 261-8986
+              </p>
+
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default ContactSection;
+
+

@@ -5,7 +5,7 @@ export default function TestimonialsSection({params}){
 
   const testimonials = [
     {
-      name: "Sarah Johnson Doe",
+      name: "Sarah Johnson",
       text: "Absolutely reliable and fast! My packages always arrive on time.",
       image: "https://randomuser.me/api/portraits/women/44.jpg"
     },

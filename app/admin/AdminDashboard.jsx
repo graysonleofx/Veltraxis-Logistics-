@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import  supabase from '@/lib/supabaseClient';
-import { sendEmailNotification } from '@/lib/sendEmailNotify';
+// import { sendEmailNotification } from '@/lib/sendEmailNotify';
 
 
 export default function AdminDashboard({ onLogout }) {
@@ -67,7 +67,7 @@ export default function AdminDashboard({ onLogout }) {
       const totalShipments = data.length;
       const inTransit = data.filter(s => s.status === 'In Transit').length;
       const delivered = data.filter(s => s.status === 'Delivered').length;
-      const processing = data.filter(s => s.status === 'Package Received').length;
+      const processing = data.filter(s => s.status === 'Processing').length;
 
       setStatss({
         totalShipments,
@@ -110,8 +110,8 @@ export default function AdminDashboard({ onLogout }) {
   });
 
   const generateTrackingId = () => {
-    const prefix = 'PWL-';
-    const number = Math.floor(Math.random() * 9000) + 1000;
+    const prefix = 'TRK-';
+    const number = Math.floor(Math.random() * 9000000) + 1000000;
     return `${prefix}${number}`;
   };
 
@@ -262,7 +262,7 @@ export default function AdminDashboard({ onLogout }) {
       weight: newShipment.weight,
       from: newShipment.from,
       to: newShipment.to,
-      status: 'Package Recieved',
+      status: 'Processing',
       created: new Date().toISOString().split('T')[0],
       estimatedDelivery: newShipment.estimatedDelivery,
       timeline: []
@@ -296,7 +296,7 @@ export default function AdminDashboard({ onLogout }) {
     alert(`Shipment created successfully! Tracking ID: ${trackingId}`);
 
     await updateTimeline(trackingId, {
-      status: 'Packaged Recieved',
+      status: 'Processing',
       // from: newShipment.from,
       currentDate: new Date().toISOString().split('T')[0],
       completed: true
@@ -313,10 +313,32 @@ export default function AdminDashboard({ onLogout }) {
       to: newShip.to,
       estimatedDelivery: newShip.estimatedDelivery,
       status: newShip.status,
-      trackingUrl: `pennywiselogistics.online/track/${trackingId}`
+      trackingUrl: `https://shipwidelogistics.online/#tracking/`
     }
 
-    await sendEmailNotification(newShip.receiverEmail, trackingId, shipmentDetails);
+    try{
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          email: newShip.receiverEmail,
+          trackingId: trackingId,
+          shipmentDetails: shipmentDetails
+        })
+      });
+      const result = await res.json();
+      if(result.success){
+        console.log('Email sent successfully:', result);
+        alert('Email notification sent successfully!');
+      }else{
+        console.error('Error sending email:', result);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email notification. Please try again later.');
+    } 
+
+    // await sendEmailNotification(newShip.receiverEmail, trackingId, shipmentDetails);
   };
 
   const updateTimeline = async (trackingId, newTimelineItem) => {
@@ -436,6 +458,23 @@ export default function AdminDashboard({ onLogout }) {
     alert(`Shipment status updated to ${newStatus}`);
   };
 
+  const handleDeleteRoute = async (id) => {
+    const confirmDelete = confirm('Are you sure you want to delete this shipment?');
+    if (!confirmDelete) return;
+
+    const { error } = await supabase
+      .from('Shipments')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      alert('Failed to delete shipment. Please try again.');
+      return;
+    }
+
+    setShipments(prev => prev.filter(shipment => shipment.id !== id));
+    alert('Shipment deleted successfully.');
+  };
 
   const userStats = [
     { label: 'Total Users', value: userStat.totalUsers, icon: 'ri-user-line', color: 'bg-blue-500' },
@@ -445,7 +484,9 @@ export default function AdminDashboard({ onLogout }) {
     { label: 'Total Shipments', value: statss.totalShipments, icon: 'ri-truck-line', color: 'bg-blue-500' },
     { label: 'In Transit', value: statss.inTransit, icon: 'ri-road-map-line', color: 'bg-orange-500' },
     { label: 'Delivered', value: statss.delivered, icon: 'ri-check-line', color: 'bg-green-500' },
-    { label: 'Processing', value: statss.processing, icon: 'ri-time-line', color: 'bg-yellow-500' }
+    { label: 'Processing', value: statss.processing, icon: 'ri-time-line', color: 'bg-yellow-500' },
+    { label: 'On Hold', value: statss.onHold, icon: 'ri-pause-line', color: 'bg-red-500' },
+    { label: 'Dispatched', value: statss.dispatched, icon: 'ri-truck-line', color: 'bg-blue-500' }
   ];
 
   const deliveryStages = [
@@ -506,7 +547,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('users')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'users'
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-secondary text-secondary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -516,7 +557,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('overview')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'overview'
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-secondary text-secondary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -526,7 +567,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('register')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'register'
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-secondary text-secondary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -536,7 +577,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('create')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'create'
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-secondary text-secondary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -640,8 +681,10 @@ export default function AdminDashboard({ onLogout }) {
                             onChange={(e) => handleStatusChange(shipment.id, e.target.value)}
                             className="text-xs border border-gray-300 rounded px-2 py-1 pr-8 mb-2"
                           >
-                            <option value="Package Received">Package Created</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Dispatched">Dispatched</option>
                             <option value="In Transit">In Transit</option>
+                            <option value="On Hold">On Hold</option>
                             <option value="Out for Delivery">Out for Delivery </option>
                             <option value="Delivered">Delivered</option>
                           </select>
@@ -660,6 +703,15 @@ export default function AdminDashboard({ onLogout }) {
                               Edit
                             </button>
                           )}
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold"
+                              onClick={() => handleDeleteRoute(shipment.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -683,7 +735,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.fullname}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="John Doe"
                     />
                   </div>
@@ -698,7 +750,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.email}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-seondary focus:border-transparent outline-none text-sm"
                       placeholder="johndeo@gmail.com"
                     />
                   </div>
@@ -713,7 +765,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.password}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="********"
                     />
                   </div>
@@ -722,7 +774,7 @@ export default function AdminDashboard({ onLogout }) {
 
                 <button
                   type="submit"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  className="bg-secondary hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <i className="ri-add-line mr-2"></i>
                   Add User
@@ -744,8 +796,8 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.receiverName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
-                      placeholder="ABC Corporation"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      placeholder="John Deo"
                     />
                   </div>
 
@@ -757,17 +809,17 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.senderName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
-                      placeholder="ABC Corporation"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      placeholder="Micheal Leo"
                     />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Select User</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Recievers Email</label>
 
-                    <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm">
+                    <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm">
                       <option value="">Select a User</option>
                       {users.map((user) => (
                         <option key={user.id} value={user.email}>
@@ -795,7 +847,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.description}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="Electronics"
                     />
                   </div>
@@ -810,20 +862,20 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.from}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="Shanghai Port"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">To(Arrival)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">To (Arrival)</label>
                     <input
                       type="text"
                       name="to"
                       value={newShipment.to}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="New York Port"
                     />
                   </div>
@@ -838,7 +890,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.weight}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                       placeholder="1000"
                     />
                   </div>
@@ -850,7 +902,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.estimatedDelivery}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                     />
                   </div>
                 </div>
@@ -859,7 +911,7 @@ export default function AdminDashboard({ onLogout }) {
 
                 <button
                   type="submit"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  className="bg-secondary hover:scale-105 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <i className="ri-add-line mr-2"></i>
                   Create Shipment

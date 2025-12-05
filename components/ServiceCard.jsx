@@ -12,7 +12,7 @@ const ServiceCard = ({ id, title, description, image, icon }) => {
           alt={title}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
         />
-        <div className="absolute top-4 left-4 w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+        <div className="absolute top-4 left-4 w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
           <i className={`${icon} text-white text-xl`}></i>
         </div>
       </div>
@@ -21,7 +21,7 @@ const ServiceCard = ({ id, title, description, image, icon }) => {
         <h3 className="text-xl font-bold text-slate-800 mb-3">{title}</h3>
         <p className="text-gray-600 mb-4 leading-relaxed">{description}</p>
         <Link href={`/services/${id}`}>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors whitespace-nowrap cursor-pointer">
+          <button className="bg-secondary hover:bg-secondary-600 text-white px-6 py-2 rounded-full font-medium transition-colors whitespace-nowrap cursor-pointer">
             Read More
           </button>
         </Link>

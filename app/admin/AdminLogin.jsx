@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import  supabase  from '@/lib/supabaseClient';
+import brand from '@/public/assets/brand.png';
 
 
 export default function AdminLogin( { onLogin }) {
@@ -71,10 +72,10 @@ export default function AdminLogin( { onLogin }) {
     if (credentials.email === '' || credentials.password === '') {
       setError('Please fill in all fields');
       return;
-    } else if (credentials.email !== 'admin@admin.com') {
+    } else if (credentials.email !== 'admin@shipwideLogistics.online') {
       setError('Invalid email or password');
       return;
-    } else if (credentials.password !== 'admin123') {
+    } else if (credentials.password !== '1937519375@123') {
       setError('Invalid email or password');
       return;
     }
@@ -143,8 +144,8 @@ export default function AdminLogin( { onLogin }) {
       <div className="max-w-md w-full">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i className="ri-admin-line text-orange-500 text-2xl"></i>
+            <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i className="ri-admin-line text-secondary text-2xl"></i>
             </div>
             <h2 className="text-2xl font-bold text-slate-800">Admin Login</h2>
             <p className="text-gray-600 mt-2">Access the shipment management dashboard</p>
@@ -168,7 +169,7 @@ export default function AdminLogin( { onLogin }) {
                 value={credentials.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                 placeholder="Enter email"
               />
             </div>
@@ -181,7 +182,7 @@ export default function AdminLogin( { onLogin }) {
                 value={credentials.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
                 placeholder="Enter password"
               />
             </div>
@@ -189,7 +190,7 @@ export default function AdminLogin( { onLogin }) {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+              className="w-full bg-secondary hover:bg-secondary/60 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
