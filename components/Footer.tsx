@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import logo from '@/public/assets/brand.png';
+import logo from '@/public/assets/logo.png';
 import Image from 'next/image';
 
 export default function Footer() {
@@ -25,7 +25,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-secondary text-white">
+    <footer className="bg-cyan-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
@@ -35,20 +35,6 @@ export default function Footer() {
             <p className="text-gray-300 mb-6 leading-relaxed">
               Your trusted partner in global logistics and freight transportation. We deliver excellence across land, sea, and rail.
             </p>
-            {/* <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-gray-700 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                <i className="ri-facebook-fill text-lg"></i>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-700 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                <i className="ri-twitter-fill text-lg"></i>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-700 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                <i className="ri-linkedin-fill text-lg"></i>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-700 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                <i className="ri-instagram-fill text-lg"></i>
-              </a>
-            </div> */}
           </div>
 
           <div>
@@ -82,19 +68,19 @@ export default function Footer() {
             <h4 className="text-xl font-semibold mb-6">Contact Info</h4>
             <div className="space-y-4">
               <div className="flex items-start">
-                <i className="ri-map-pin-line text-background text-lg mr-3 mt-1"></i>
+                <i className="ri-map-pin-line text-cyan-400 text-lg mr-3 mt-1"></i>
                 <p className="text-gray-300">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
               </div>
               {/* <div className="flex items-center">
-                <i className="ri-phone-line text-background text-lg mr-3"></i>
+                <i className="ri-phone-line text-cyan-400 text-lg mr-3"></i>
                 <p className="text-gray-300">+1 704 677-4835</p>
               </div> */}
               <div className="flex items-center">
-                <i className="ri-mail-line text-background text-lg mr-3"></i>
+                <i className="ri-mail-line text-cyan-400 text-lg mr-3"></i>
                 <p className="text-gray-300">contact-us@shipwidelogistics.online</p>
               </div>
               <div className="flex items-center">
-                <i className="ri-time-line text-background text-lg mr-3"></i>
+                <i className="ri-time-line text-cyan-400 text-lg mr-3"></i>
                 <p className="text-gray-300">24/7 Support Service</p>
               </div>
             </div>
@@ -104,7 +90,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © {currentYear} Ship wide Logistics & Transportation. All rights reserved.
+              © {currentYear} GlobalAxis Logistics & Transportation. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-orange-400 text-sm transition-colors cursor-pointer">Privacy Policy</a>

@@ -1,21 +1,38 @@
 import services from '@/data/services';
 import Link from 'next/link';
-export default function ContactSection({params}){
+
+export default function ContactSection({ params }) {
   const service = services.find((service) => service.id === params.id);
-  
-  return(
-    <section className="max-w-5xl mx-auto px-4 py-12 flex flex-col items-center bg-slate-800 rounded-2xl shadow-lg mb-12">
-        <h2 className="text-3xl font-bold text-white mb-4 text-center">Ready to get started?</h2>
-        <p className="text-white text-lg mb-6 text-center max-w-xl">
-          Join thousands of happy customers and experience premium delivery services today.
-        </p>
-        <Link href="/#contact" className="px-8 py-3 bg-white text-slate-800 font-semibold rounded-full shadow hover:bg-blue-50 transition">
-          {/* <a
-            className="px-8 py-3 bg-white text-slate-800 font-semibold rounded-full shadow hover:bg-blue-50 transition"
-          > */}
-            Contact Us
-          {/* </a> */}
-        </Link>
+
+  return (
+    <section id="contact" className="max-w-5xl mx-auto px-4 py-14 sm:py-18">
+      <div className="bg-gradient-to-r from-cyan-600 to-slate-700 text-white rounded-3xl shadow-2xl border border-cyan-300">
+        <div className="grid md:grid-cols-2 gap-8 p-8 sm:p-10 items-center">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+            <p className="text-cyan-100 text-lg sm:text-xl leading-relaxed mb-6">
+              Connect with a logistics specialist for {service.title} and get a custom delivery plan fast.
+            </p>
+            <p className="text-cyan-100 text-sm sm:text-base opacity-90">
+              We provide a tailored quote and timeline, with dedicated support during the entire transit lifecycle.
+            </p>
+          </div>
+          <div className="space-y-3">
+            <a
+              href="/#contact"
+              className="block w-full text-center rounded-full bg-white/95 text-cyan-700 font-bold px-6 py-3 hover:bg-white transition"
+            >
+              Contact Us
+            </a>
+            <a
+              href="mailto:sales@shipwidelogistics.online"
+              className="block w-full text-center rounded-full border border-white/70 bg-white/5 text-white font-semibold px-6 py-3 hover:bg-white/10 transition"
+            >
+              Email Sales
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
-  )
+  );
 }

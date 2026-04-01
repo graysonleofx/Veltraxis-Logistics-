@@ -313,7 +313,7 @@ export default function AdminDashboard({ onLogout }) {
       to: newShip.to,
       estimatedDelivery: newShip.estimatedDelivery,
       status: newShip.status,
-      trackingUrl: `https://shipwidelogistics.online/#tracking/`
+      trackingUrl: `https://globalaxislogistics.online/#tracking/`
     }
 
     try{
@@ -547,7 +547,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('users')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'users'
-                  ? 'border-secondary text-secondary'
+                  ? 'border-cyan-500 text-cyan-500'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -557,7 +557,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('overview')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'overview'
-                  ? 'border-secondary text-secondary'
+                  ? 'border-cyan-500 text-cyan-500'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -567,7 +567,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('register')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'register'
-                  ? 'border-secondary text-secondary'
+                  ? 'border-cyan-500 text-cyan-500'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -577,7 +577,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('create')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'create'
-                  ? 'border-secondary text-secondary'
+                  ? 'border-cyan-500 text-cyan-500'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -735,7 +735,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.fullname}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="John Doe"
                     />
                   </div>
@@ -750,7 +750,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.email}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-seondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="johndeo@gmail.com"
                     />
                   </div>
@@ -765,7 +765,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newUser.password}
                       onChange={handleUserInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="********"
                     />
                   </div>
@@ -774,7 +774,7 @@ export default function AdminDashboard({ onLogout }) {
 
                 <button
                   type="submit"
-                  className="bg-secondary hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <i className="ri-add-line mr-2"></i>
                   Add User
@@ -796,7 +796,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.receiverName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="John Deo"
                     />
                   </div>
@@ -809,7 +809,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.senderName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="Micheal Leo"
                     />
                   </div>
@@ -819,7 +819,7 @@ export default function AdminDashboard({ onLogout }) {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Select Recievers Email</label>
 
-                    <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm">
+                    <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm">
                       <option value="">Select a User</option>
                       {users.map((user) => (
                         <option key={user.id} value={user.email}>
@@ -847,7 +847,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.description}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="Electronics"
                     />
                   </div>
@@ -862,7 +862,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.from}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="Shanghai Port"
                     />
                   </div>
@@ -875,7 +875,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.to}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="New York Port"
                     />
                   </div>
@@ -890,7 +890,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.weight}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                       placeholder="1000"
                     />
                   </div>
@@ -902,7 +902,7 @@ export default function AdminDashboard({ onLogout }) {
                       value={newShipment.estimatedDelivery}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     />
                   </div>
                 </div>
@@ -911,7 +911,7 @@ export default function AdminDashboard({ onLogout }) {
 
                 <button
                   type="submit"
-                  className="bg-secondary hover:scale-105 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  className="bg-cyan-500 hover:scale-105 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <i className="ri-add-line mr-2"></i>
                   Create Shipment

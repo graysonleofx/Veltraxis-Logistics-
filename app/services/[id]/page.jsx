@@ -1,11 +1,12 @@
 
 // import { useEffect, useState } from "react";
 import services from '@/data/services';
+import TopHeader from '@/components/TopHeader';
 import Header from './Header';
 import HeroSection from './HeroSection';
-import OverviewSection from './OverviewSection'
-import FeatureSection from '@/components/TrustedBySection'
-import ChooseSection from './ChooseSection'
+import OverviewSection from './OverviewSection';
+import FeatureSection from './FeaturesSection';
+import ChooseSection from './ChooseSection';
 import TestimonialsSection from './TestimonialsSection';
 import ContactSection from './ContactSection';
 import Footer from '@/components/Footer';
@@ -18,13 +19,55 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }) {
-  const service = services.find((service) => service.id === params.id);
+// export default function Page({ params }) {
+//   const service = services.find((service) => service.id === params.id);
 
-  // const [loaded, setLoaded] = useState(false);
-  // useEffect(() => {
-  //   setLoaded(true);
-  // }, []);
+//   // const [loaded, setLoaded] = useState(false);
+//   // useEffect(() => {
+//   //   setLoaded(true);
+//   // }, []);
+
+//   if (!service) {
+//     return (
+//       <div className="flex items-center justify-center h-screen">
+//         <h1 className="text-2xl font-bold text-red-500">Service not found</h1>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <>
+//       <TopHeader />
+//       <Header />
+
+//       {/* Hero Section */}
+//       <HeroSection params={params}/>
+
+//       {/* Overview Section */}
+//       <OverviewSection params={params}/>
+
+//       {/* Features Section */}
+//       <FeatureSection params={params}/>
+
+//       {/* Why Choose Us Section */}
+//       <ChooseSection params={params}/>
+
+//       {/* Testimonials Section */}
+//       <TestimonialsSection params={params}/>
+
+//       {/* CTA Section */}
+//       <ContactSection params={params}/>
+
+//       <Footer />
+//     </>
+//   );
+// };
+
+
+export default async function Page({ params }) {
+  const { id } = await params;
+
+  const service = services.find((service) => service.id === id);
 
   if (!service) {
     return (
@@ -36,28 +79,17 @@ export default function Page({ params }) {
 
   return (
     <>
+      <TopHeader />
       <Header />
 
-      {/* Hero Section */}
-      <HeroSection params={params}/>
-
-      {/* Overview Section */}
-      <OverviewSection params={params}/>
-
-      {/* Features Section */}
-      <FeatureSection params={params}/>
-
-      {/* Why Choose Us Section */}
-      <ChooseSection params={params}/>
-
-      {/* Testimonials Section */}
-      <TestimonialsSection params={params}/>
-
-      {/* CTA Section */}
-      <ContactSection params={params}/>
+      <HeroSection params={{ id }} />
+      <OverviewSection params={{ id }} />
+      <FeatureSection params={{ id }} />
+      <ChooseSection params={{ id }} />
+      <TestimonialsSection params={{ id }} />
+      <ContactSection params={{ id }} />
 
       <Footer />
     </>
   );
-};
-
+}

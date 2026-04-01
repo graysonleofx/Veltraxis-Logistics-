@@ -72,7 +72,7 @@ export default function AdminLogin( { onLogin }) {
     if (credentials.email === '' || credentials.password === '') {
       setError('Please fill in all fields');
       return;
-    } else if (credentials.email !== 'admin@shipwideLogistics.online') {
+    } else if (credentials.email !== 'admin@globalaxislogistics.online') {
       setError('Invalid email or password');
       return;
     } else if (credentials.password !== '1937519375@123') {
@@ -97,39 +97,7 @@ export default function AdminLogin( { onLogin }) {
       setIsLoading(false);
       return;
     }
-    // If you are using Supabase, you can use the following code to sign in
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: credentials.email,
-    //   password: credentials.password
-    // });
-    // if (error) {
-    //   setError('Invalid email or password');
-    //   setIsLoading(false);
-    //   return;
-    // }
-    // // If the login is successful, call the onLogin function
-    // if (data.user && data.user.role === 'admin') {
-    //   onLogin();
-    // }
-    // setIsLoading(false);
-
-    // // If the login fails, set an error message
-    // if (data || !data.user || data.user.role !== 'admin') {
-    //   setError('Access denied. You must be an admin to log in.');
-    //   setIsLoading(false);
-    //   return;
-    // }
   }
-
-  // setTimeout(() => {
-  //   // Simulate checking credentials
-  //   if (credentials.password === 'admin123' && credentials.email === 'admin@admin.com') {
-  //     onLogin();
-  //   } else {
-  //     setError('Invalid email or password');
-  //   }
-  //   setIsLoading(false);
-  // }, 1000);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -144,8 +112,8 @@ export default function AdminLogin( { onLogin }) {
       <div className="max-w-md w-full">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i className="ri-admin-line text-secondary text-2xl"></i>
+            <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i className="ri-admin-line text-cyan-500 text-2xl"></i>
             </div>
             <h2 className="text-2xl font-bold text-slate-800">Admin Login</h2>
             <p className="text-gray-600 mt-2">Access the shipment management dashboard</p>
@@ -169,7 +137,7 @@ export default function AdminLogin( { onLogin }) {
                 value={credentials.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                 placeholder="Enter email"
               />
             </div>
@@ -182,7 +150,7 @@ export default function AdminLogin( { onLogin }) {
                 value={credentials.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                 placeholder="Enter password"
               />
             </div>
@@ -190,7 +158,7 @@ export default function AdminLogin( { onLogin }) {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-secondary hover:bg-secondary/60 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+              className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">

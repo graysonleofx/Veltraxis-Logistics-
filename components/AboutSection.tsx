@@ -1,14 +1,17 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import logisticsWorker from '@/public/assets/delivery.jpg'
 import Image from 'next/image';
 
 export default function AboutSection() {
+  const [counters, setCounters] = useState([0, 0, 0, 0]);
+
   const stats = [
-    { number: '80k', label: 'Successful Delivery', icon: 'ri-truck-line' },
-    { number: '456', label: 'Top Freight', icon: 'ri-ship-line' },
-    { number: '45+', label: 'Countries of Operation', icon: 'ri-global-line' },
-    { number: '325', label: 'Satisfaction Clients', icon: 'ri-user-star-line' }
+    { number: 80000, label: 'Successful Delivery', icon: 'ri-truck-line' },
+    { number: 456, label: 'Top Freight', icon: 'ri-ship-line' },
+    { number: 45, label: 'Countries of Operation', icon: 'ri-global-line' },
+    { number: 325, label: 'Satisfaction Clients', icon: 'ri-user-star-line' }
   ];
 
   const services = [
@@ -20,65 +23,113 @@ export default function AboutSection() {
     'Project Cargo Shipping'
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounters(prev => prev.map((count, index) => {
+        if (count < stats[index].number) {
+          return count + Math.ceil(stats[index].number / 100);
+        }
+        return stats[index].number;
+      }));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="bg-accent rounded-2xl p-8">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 via-slate-50 to-cyan-50 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-500 rounded-full"></div>
+        <div className="absolute bottom-10 right-10 w-24 h-24 bg-slate-500 rounded-full"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-cyan-400 rounded-full"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Stats Section with Animation */}
+        <div className="bg-gradient-to-r from-cyan-600 to-slate-700 rounded-3xl p-8 mb-16 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className={`${stat.icon} text-white text-xl`}></i>
+              <div key={index} className="text-center group">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <i className={`${stat.icon} text-white text-2xl`}></i>
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-gray-300 text-sm">{stat.label}</div>
+                <div className="text-4xl font-bold text-white mb-2 font-mono">
+                  {counters[index].toLocaleString()}{stat.number === 80000 ? 'k' : ''}
+                </div>
+                <div className="text-cyan-100 text-sm font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mt-16">
-          <div>
-            <span className="text-secondary font-semibold text-lg mb-4 block">Who We Are</span>
-            <h2 className="text-4xl font-bold text-slate-800 mb-6">
-              We ensure your items arrive safely and intact
-            </h2>
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              Ship Wide Logistics offers expert air freight services, providing the insight and solutions needed to optimize every mile of your supply chain. Experience enhanced transport and logistics efficiency with our advanced supply chain technology and expertise.
-            </p>
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <div>
+              <span className="inline-block bg-cyan-100 text-cyan-800 font-semibold px-4 py-2 rounded-full text-sm mb-4">
+                Who We Are
+              </span>
+              <h2 className="text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                We ensure your items arrive{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-slate-600">
+                  safely and intact
+                </span>
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                  GlobalAxis Logistics offers expert air freight services, providing the insight and solutions needed to optimize every mile of your supply chain. Experience enhanced transport and logistics efficiency with our advanced supply chain technology and expertise.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            {/* Services Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {services.map((service, index) => (
-                <div key={index} className="flex items-center">
-                  <i className="ri-check-line text-secondary-500 text-xl mr-3"></i>
-                  <span className="text-gray-700">{service}</span>
+                <div key={index} className="flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-slate-500 rounded-lg flex items-center justify-center mr-4">
+                    <i className="ri-check-line text-white text-lg"></i>
+                  </div>
+                  <span className="text-slate-800 font-medium">{service}</span>
                 </div>
               ))}
             </div>
 
-            {/* <div className="bg-secondary text-white p-6 rounded-lg">
-              <div className="flex items-center mb-2">
-                <i className="ri-phone-line text-background text-xl mr-3"></i>
-                <span className="text-gray-300">Have Questions?</span>
+            {/* CTA */}
+            <div className="bg-gradient-to-r from-cyan-600 to-slate-600 text-white p-8 rounded-2xl shadow-xl">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                  <i className="ri-phone-line text-white text-xl"></i>
+                </div>
+                <div>
+                  <p className="text-cyan-100">Have Questions?</p>
+                  <p className="text-2xl font-bold">Call Us Any Time</p>
+                </div>
               </div>
-              <p className="text-xl font-semibold">Call Us Any Time</p>
-              <p className="text-background text-lg">+1 223-456-7890</p>
-            </div> */}
+              <p className="text-white text-xl font-semibold">+1 223-000-0000</p>
+            </div>
           </div>
 
+          {/* Image Section */}
           <div className="relative">
-            <Image
-              src={logisticsWorker}
-              alt="Logistics Worker"
-              className="w-full h-auto rounded-lg shadow-lg"
-            />
+            <div className="relative z-10">
+              <Image
+                src={logisticsWorker}
+                alt="Logistics Worker"
+                className="w-full h-auto rounded-2xl shadow-2xl"
+              />
+            </div>
 
-            <div className="absolute bottom-4 right-4 bg-secondary text-white p-6 rounded-lg">
+            {/* Floating Experience Card */}
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-2xl z-20 animate-pulse">
               <div className="text-center">
-                <div className="text-3xl font-bold mb-1">35</div>
-                <div className="text-sm">YEARS OF EXPERIENCE</div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">40</div>
+                <div className="text-sm text-slate-600 uppercase tracking-wide">Years of Experience</div>
+                <div className="w-12 h-1 bg-gradient-to-r from-cyan-500 to-slate-500 mx-auto mt-2 rounded-full"></div>
               </div>
             </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-4 -left-4 w-20 h-20 bg-cyan-200 rounded-full opacity-50 animate-bounce"></div>
+            <div className="absolute top-1/4 -right-8 w-12 h-12 bg-slate-300 rounded-full opacity-70 animate-ping"></div>
           </div>
         </div>
       </div>

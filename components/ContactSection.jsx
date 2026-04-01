@@ -57,13 +57,11 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-gradient-to-b from-slate-100 via-white to-slate-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-secondary font-semibold text-lg mb-4 block">Contact Us</span>
-          <h2 className="text-4xl font-bold text-slate-800 mb-4">
-            Get In Touch With Us
-          </h2>
+          <span className="text-cyan-600 font-semibold text-lg mb-4 block uppercase tracking-wider">Contact Us</span>
+          <h2 className="text-4xl font-bold text-slate-800 mb-4">Get In Touch With Us</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Have questions about our logistics services? Need a quote? We're here to help you with all your shipping needs.
           </p>
@@ -73,11 +71,20 @@ const ContactSection = () => {
           <div>
             <h3 className="text-2xl font-bold text-slate-800 mb-6">Send us a message</h3>
             
-            {submitStatus === 'success' && (
-              <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg mb-6">
-                <div className="flex items-center">
-                  <i className="ri-check-circle-line text-green-500 text-xl mr-2"></i>
-                  Thank you! Your message has been sent successfully.
+            {submitStatus === 'Message sent successfully' && (
+              <div className="bg-cyan-50 border border-cyan-200 text-cyan-900 px-4 py-3 rounded-lg mb-6">
+                <div className="flex items-center justify-center gap-2">
+                  <i className="ri-check-circle-line text-cyan-500 text-xl"></i>
+                  <span className="font-medium">Thank you! Your message has been sent successfully.</span>
+                </div>
+              </div>
+            )}
+
+            {submitStatus === 'Failed to send message' && (
+              <div className="bg-rose-50 border border-rose-200 text-rose-800 px-4 py-3 rounded-lg mb-6">
+                <div className="flex items-center justify-center gap-2">
+                  <i className="ri-alert-line text-rose-500 text-xl"></i>
+                  <span className="font-medium">Failed to send message. Please try again.</span>
                 </div>
               </div>
             )}
@@ -92,7 +99,7 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     placeholder="John Doe"
                   />
                 </div>
@@ -104,7 +111,7 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -118,7 +125,7 @@ const ContactSection = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
@@ -130,7 +137,7 @@ const ContactSection = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     placeholder="Shipping Inquiry"
                   />
                 </div>
@@ -145,7 +152,7 @@ const ContactSection = () => {
                   required
                   maxLength={500}
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm resize-none"
                   placeholder="Tell us about your shipping requirements..."
                 ></textarea>
                 <div className="text-right text-sm text-gray-500 mt-1">
@@ -153,7 +160,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <button type="submit" disabled={loading} className={`w-full p-3 bg-secondary text-white font-semibold rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              <button type="submit" disabled={loading} className={`w-full p-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-full ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                 {loading ? 'Sending...' : 'Send Message'} 
               </button>
               {submitStatus && <p className="text-center text-sm text-gray-600 mt-4">{submitStatus}</p>}
@@ -165,49 +172,39 @@ const ContactSection = () => {
             
             <div className="space-y-6 mb-8">
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-map-pin-line text-secondary text-xl"></i>
+                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-map-pin-line text-cyan-600 text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Our Address</h4>
-                  <h4 className="font-semibold text-slate-800 mb-1">Ship wide Logistics LLC</h4>
+                  <h4 className="font-semibold text-slate-800 mb-1">GlobalAxis Logistics LLC</h4>
                   <p className="text-gray-600">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
                 </div>
               </div>
 
-              {/* <div className="flex items-start">
-                <div className="w-12 h-12  bg-secondary/10  rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-phone-line text-secondary text-xl"></i>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-slate-800 mb-1">Phone Number</h4>
-                  <p className="text-gray-600">+1 704 000-0000</p>
-                </div>
-              </div> */}
-
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-mail-line text-secondary text-xl"></i>
+                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-mail-line text-cyan-600 text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Email Address</h4>
-                  <p className="text-gray-600">contact-us@shipwidelogistics.online</p>
+                  <p className="text-gray-600">contact-us@globalaxislogistics.online</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-whatsapp-line text-secondary text-xl"></i>
+                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-whatsapp-line text-cyan-600 text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">WhatsApp</h4>
-                  <p className="text-gray-600">+1 (682) 261-8986</p>
+                  <p className="text-gray-600">+1 (000) 000-0000</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-time-line text-secondary text-xl"></i>
+                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-time-line text-cyan-600 text-xl"></i>
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-800 mb-1">Business Hours</h4>
@@ -217,13 +214,13 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="bg-secondary/10 rounded-lg p-6">
-              <h4 className="font-semibold text-secondary mb-4">Emergency Contact</h4>
+            <div className="bg-cyan-100 rounded-lg p-6">
+              <h4 className="font-semibold text-cyan-700 mb-4">Emergency Contact</h4>
               <p className="text-gray-800 mb-2">24/7 Support for urgent shipments</p>
               
-              <p className="text-background font-semibold text-lg">
-                <i className="ri-whatsapp-line text-background text-xl mr-2"></i>
-               +1 (682) 261-8986
+              <p className="text-cyan-700 font-semibold text-lg">
+                <i className="ri-mail-line text-cyan-700 text-xl mr-2"></i>
+                contact-us@globalaxislogistics.online
               </p>
 
             </div>
