@@ -11,20 +11,19 @@ const partners = [
 
 export default function TrustedBySection() {
   return (
-    <section id="trusted" className="py-16 bg-gradient-to-b from-slate-100 via-white to-slate-50">
+    <section id="trusted" className="py-16 bg-bg-main">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <span className="text-cyan-500 font-semibold uppercase tracking-widest text-sm mb-2 block">Trusted by Industry Leaders</span>
-          <h3 className="text-3xl md:text-4xl font-bold text-slate-800">Global Partners That Trust Us</h3>
+          <h3 className="text-3xl md:text-4xl font-bold text-text-white">Trusted by Global Partners</h3>
         </div>
 
         <div className="mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-5xl">
           {partners.map((partner, idx) => (
-            <div key={idx} className="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300">
+            <div key={idx} className="bg-bg-secondary border border-text-muted rounded-xl p-4 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300">
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="h-12 max-w-[110px] object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                className="h-12 max-w-[110px] object-contain filter grayscale-0 transition-all duration-300"
               />
             </div>
           ))}

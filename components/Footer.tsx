@@ -25,14 +25,14 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-cyan-900 text-white">
+    <footer className="bg-bg-main text-text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
               <Image src={logo} alt="Logo" style={{objectFit: "contain", height: "100px", width: "100px"}} />
             </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-text-muted mb-6 leading-relaxed">
               Your trusted partner in global logistics and freight transportation. We deliver excellence across land, sea, and rail.
             </p>
           </div>
@@ -44,7 +44,7 @@ export default function Footer() {
                 <li key={index}>
                   <a 
                     href={link.href}
-                    className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+                    className="text-text-muted hover:text-red-primary transition-colors cursor-pointer"
                   >
                     {link.name}
                   </a>
@@ -58,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((service, index) => (
                 <li key={index}>
-                  <span className="text-gray-300">{service}</span>
+                  <span className="text-text-muted">{service}</span>
                 </li>
               ))}
             </ul>
@@ -68,34 +68,34 @@ export default function Footer() {
             <h4 className="text-xl font-semibold mb-6">Contact Info</h4>
             <div className="space-y-4">
               <div className="flex items-start">
-                <i className="ri-map-pin-line text-cyan-400 text-lg mr-3 mt-1"></i>
-                <p className="text-gray-300">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
+                <i className="ri-map-pin-line text-red-primary text-lg mr-3 mt-1"></i>
+                <p className="text-text-muted">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
               </div>
               {/* <div className="flex items-center">
-                <i className="ri-phone-line text-cyan-400 text-lg mr-3"></i>
-                <p className="text-gray-300">+1 704 677-4835</p>
+                <i className="ri-phone-line text-red-primary text-lg mr-3"></i>
+                <p className="text-text-muted">+1 704 677-4835</p>
               </div> */}
               <div className="flex items-center">
-                <i className="ri-mail-line text-cyan-400 text-lg mr-3"></i>
-                <p className="text-gray-300">contact-us@shipwidelogistics.online</p>
+                <i className="ri-mail-line text-red-primary text-lg mr-3"></i>
+                <p className="text-text-muted">info@veltraxislogistics.online</p>
               </div>
               <div className="flex items-center">
-                <i className="ri-time-line text-cyan-400 text-lg mr-3"></i>
-                <p className="text-gray-300">24/7 Support Service</p>
+                <i className="ri-time-line text-red-primary text-lg mr-3"></i>
+                <p className="text-text-muted">24/7 Support Service</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-12 pt-8">
+        <div className="border-t border-text-muted/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © {currentYear} GlobalAxis Logistics & Transportation. All rights reserved.
+            <p className="text-text-muted text-sm">
+              © {currentYear} Veltraxis Logistics & Transportation. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-orange-400 text-sm transition-colors cursor-pointer">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-orange-400 text-sm transition-colors cursor-pointer">Terms of Service</a>
-              {/* <Link href="/admin" className="text-gray-400 hover:text-orange-400 text-sm transition-colors cursor-pointer">Admin Portal</Link> */}
+              <a href="#" className="text-text-muted hover:text-red-primary text-sm transition-colors cursor-pointer">Privacy Policy</a>
+              <a href="#" className="text-text-muted hover:text-red-primary text-sm transition-colors cursor-pointer">Terms of Service</a>
+              {/* <Link href="/admin" className="text-text-muted hover:text-red-primary text-sm transition-colors cursor-pointer">Admin Portal</Link> */}
             </div>
           </div>
         </div>

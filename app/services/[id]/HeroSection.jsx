@@ -15,7 +15,7 @@ export default function HeroSection({ params }) {
         alt={service.title}
         className="absolute inset-0 w-full h-full object-cover brightness-75"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/70 via-slate-900/50 to-cyan-900/70" />
+      <div className="absolute inset-0 bg-gradient-to-br from-bg-main/95 via-bg-main/70 to-red-primary/40" />
 
       <div className="relative top-12 z-10 container mx-auto px-4 h-full flex flex-col justify-center">
         <div className="max-w-3xl text-center mx-auto">
@@ -31,13 +31,14 @@ export default function HeroSection({ params }) {
           <div className="mt-8 flex justify-center gap-4">
             <a
               href="#overview"
-              className="rounded-full bg-cyan-500 hover:bg-cyan-400 text-white px-7 py-3 font-semibold shadow-lg transition-all"
+              className="rounded-full bg-red-primary
+              hover:bg-red-hover text-white px-7 py-3 font-semibold shadow-lg transition-all"
             >
               Learn More
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-cyan-400 text-cyan-100 hover:bg-cyan-500/25 px-7 py-3 font-semibold transition-all"
+              className="rounded-full border border-red-primary text-red-primary hover:bg-red-primary hover:text-text-white px-7 py-3 font-semibold transition-all"
             >
               Contact Sales
             </a>

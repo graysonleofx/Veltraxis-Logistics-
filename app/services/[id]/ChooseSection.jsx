@@ -14,7 +14,7 @@ export default function ChooseSection({params}){
 
   return(
     <section className="max-w-5xl mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-slate-800 mb-8 text-center">Why Choose Us</h2>
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">Why Choose Us</h2>
         <div className="grid sm:grid-cols-2 gap-6">
           {whyChooseUs.map((item, idx) => (
             <div key={idx} className="flex items-start gap-3 bg-white rounded-lg shadow p-4">

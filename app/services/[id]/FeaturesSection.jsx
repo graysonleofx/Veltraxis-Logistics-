@@ -13,7 +13,7 @@ export default function FeatureSection({ params }) {
 
   return (
     <section id="features" className="max-w-5xl mx-auto px-4 py-12 sm:py-16">
-      <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">Key Features</h2>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">Key Features</h2>
       <p className="text-center text-slate-600 max-w-3xl mx-auto mb-10">
         {service.title} delivers a balanced mix of speed, visibility, and safety to meet enterprise-level logistics expectations.
       </p>
@@ -26,7 +26,7 @@ export default function FeatureSection({ params }) {
               key={idx}
               className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 flex items-start gap-4 transition-shadow duration-300 hover:shadow-2xl"
             >
-              <span className="bg-cyan-100 text-cyan-600 rounded-xl p-3">
+              <span className="bg-red-primary text-white rounded-xl p-3">
                 <Icon className="h-6 w-6" />
               </span>
               <div>

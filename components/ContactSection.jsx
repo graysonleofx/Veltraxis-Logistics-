@@ -57,33 +57,33 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-slate-100 via-white to-slate-100">
+    <section id="contact" className="py-20 bg-bg-main">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-cyan-600 font-semibold text-lg mb-4 block uppercase tracking-wider">Contact Us</span>
-          <h2 className="text-4xl font-bold text-slate-800 mb-4">Get In Touch With Us</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <span className="text-red-primary font-semibold text-lg mb-4 block uppercase tracking-wider">Contact Us</span>
+          <h2 className="text-4xl font-bold text-text-white mb-4">Get In Touch With Us</h2>
+          <p className="text-text-muted max-w-2xl mx-auto">
             Have questions about our logistics services? Need a quote? We're here to help you with all your shipping needs.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-6">Send us a message</h3>
+            <h3 className="text-2xl font-bold text-text-white mb-6">Send us a message</h3>
             
             {submitStatus === 'Message sent successfully' && (
-              <div className="bg-cyan-50 border border-cyan-200 text-cyan-900 px-4 py-3 rounded-lg mb-6">
+              <div className="bg-red-primary/10 border border-red-primary/20 text-red-primary px-4 py-3 rounded-lg mb-6">
                 <div className="flex items-center justify-center gap-2">
-                  <i className="ri-check-circle-line text-cyan-500 text-xl"></i>
+                  <i className="ri-check-circle-line text-red-primary text-xl"></i>
                   <span className="font-medium">Thank you! Your message has been sent successfully.</span>
                 </div>
               </div>
             )}
 
             {submitStatus === 'Failed to send message' && (
-              <div className="bg-rose-50 border border-rose-200 text-rose-800 px-4 py-3 rounded-lg mb-6">
+              <div className="bg-red-primary/10 border border-red-primary/20 text-red-primary px-4 py-3 rounded-lg mb-6">
                 <div className="flex items-center justify-center gap-2">
-                  <i className="ri-alert-line text-rose-500 text-xl"></i>
+                  <i className="ri-alert-line text-red-primary text-xl"></i>
                   <span className="font-medium">Failed to send message. Please try again.</span>
                 </div>
               </div>
@@ -92,26 +92,26 @@ const ContactSection = () => {
             <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-text-light mb-2">Full Name</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-text-muted rounded-lg focus:ring-2 focus:ring-red-primary focus:border-transparent outline-none text-sm bg-bg-secondary text-text-white placeholder:text-text-muted"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-text-light mb-2">Email Address</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-text-muted rounded-lg focus:ring-2 focus:ring-red-primary focus:border-transparent outline-none text-sm bg-bg-secondary text-text-white placeholder:text-text-muted"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -119,32 +119,32 @@ const ContactSection = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <label className="block text-sm font-medium text-text-light mb-2">Phone Number</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-text-muted rounded-lg focus:ring-2 focus:ring-red-primary focus:border-transparent outline-none text-sm bg-bg-secondary text-text-white placeholder:text-text-muted"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                  <label className="block text-sm font-medium text-text-light mb-2">Subject</label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-3 border border-text-muted rounded-lg focus:ring-2 focus:ring-red-primary focus:border-transparent outline-none text-sm bg-bg-secondary text-text-white placeholder:text-text-muted"
                     placeholder="Shipping Inquiry"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <label className="block text-sm font-medium text-text-light mb-2">Message</label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -152,75 +152,75 @@ const ContactSection = () => {
                   required
                   maxLength={500}
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm resize-none"
+                  className="w-full px-4 py-3 border border-text-muted rounded-lg focus:ring-2 focus:ring-red-primary focus:border-transparent outline-none text-sm resize-none bg-bg-secondary text-text-white placeholder:text-text-muted"
                   placeholder="Tell us about your shipping requirements..."
                 ></textarea>
-                <div className="text-right text-sm text-gray-500 mt-1">
+                <div className="text-right text-sm text-text-muted mt-1">
                   {formData.message.length}/500 characters
                 </div>
               </div>
 
-              <button type="submit" disabled={loading} className={`w-full p-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-full ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              <button type="submit" disabled={loading} className={`w-full p-3 bg-red-primary hover:bg-red-hover text-text-white font-semibold rounded-full transition ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                 {loading ? 'Sending...' : 'Send Message'} 
               </button>
-              {submitStatus && <p className="text-center text-sm text-gray-600 mt-4">{submitStatus}</p>}
+              {submitStatus && <p className="text-center text-sm text-text-muted mt-4">{submitStatus}</p>}
             </form>
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-bold text-text-white mb-6">Contact Information</h3>
             
             <div className="space-y-6 mb-8">
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-map-pin-line text-cyan-600 text-xl"></i>
+                <div className="w-12 h-12 bg-red-primary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-map-pin-line text-red-primary text-xl"></i>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-800 mb-1">Our Address</h4>
-                  <h4 className="font-semibold text-slate-800 mb-1">GlobalAxis Logistics LLC</h4>
-                  <p className="text-gray-600">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
+                  <h4 className="font-semibold text-text-white mb-1">Our Address</h4>
+                  <h4 className="font-semibold text-text-white mb-1">Veltraxis Logistics LLC</h4>
+                  <p className="text-text-muted">501 E Pike Street Capitol Hill. WA, Seattle 98122 United State</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-mail-line text-cyan-600 text-xl"></i>
+                <div className="w-12 h-12 bg-red-primary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-mail-line text-red-primary text-xl"></i>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-800 mb-1">Email Address</h4>
-                  <p className="text-gray-600">contact-us@globalaxislogistics.online</p>
+                  <h4 className="font-semibold text-text-white mb-1">Email Address</h4>
+                  <p className="text-text-muted">info@veltraxislogistics.online</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-whatsapp-line text-cyan-600 text-xl"></i>
+                <div className="w-12 h-12 bg-red-primary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-whatsapp-line text-red-primary text-xl"></i>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-800 mb-1">WhatsApp</h4>
-                  <p className="text-gray-600">+1 (000) 000-0000</p>
+                  <h4 className="font-semibold text-text-white mb-1">WhatsApp</h4>
+                  <p className="text-text-muted">+1 (555) 123-4567</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
-                  <i className="ri-time-line text-cyan-600 text-xl"></i>
+                <div className="w-12 h-12 bg-red-primary/10 rounded-lg flex items-center justify-center mr-4">
+                  <i className="ri-time-line text-red-primary text-xl"></i>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-800 mb-1">Business Hours</h4>
-                  <p className="text-gray-600">24 Hours Delivery</p>
+                  <h4 className="font-semibold text-text-white mb-1">Business Hours</h4>
+                  <p className="text-text-muted">24 Hours Delivery</p>
                   {/* <p className="text-gray-600">Sat: 9:00 AM - 4:00 PM</p> */}
                 </div>
               </div>
             </div>
 
-            <div className="bg-cyan-100 rounded-lg p-6">
-              <h4 className="font-semibold text-cyan-700 mb-4">Emergency Contact</h4>
-              <p className="text-gray-800 mb-2">24/7 Support for urgent shipments</p>
+            <div className="bg-red-primary/10 rounded-lg p-6">
+              <h4 className="font-semibold text-red-primary mb-4">Emergency Contact</h4>
+              <p className="text-text-white mb-2">24/7 Support for urgent shipments</p>
               
-              <p className="text-cyan-700 font-semibold text-lg">
-                <i className="ri-mail-line text-cyan-700 text-xl mr-2"></i>
-                contact-us@globalaxislogistics.online
+              <p className="text-red-primary font-semibold text-lg">
+                <i className="ri-mail-line text-red-primary text-xl mr-2"></i>
+                contact@veltraxislogistics.online
               </p>
 
             </div>

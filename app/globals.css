@@ -2,21 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-/* Custom global styles can be added below */
-/* body {
-  @apply bg-gray-100 text-gray-800;
+/* Custom color variables */
+:root {
+  --bg-main: #0D0D0D;
+  --bg-secondary: #111827;
+  --red-primary: #E11D2E;
+  --red-hover: #FF2D3D;
+  --text-white: #FFFFFF;
+  --text-light: #D1D5DB;
+  --text-muted: #6B7280;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-bold;
+/* Global styles */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-white);
 }
 
-a {
-  @apply text-blue-500 hover:text-blue-700;
+* {
+  transition: all 0.3s ease;
 }
-
-button {
-  @apply transition duration-300 ease-in-out;
-} */

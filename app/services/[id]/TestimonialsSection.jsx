@@ -23,7 +23,7 @@ export default function TestimonialsSection({ params }) {
 
   return (
     <section className="max-w-5xl mx-auto px-4 py-12 sm:py-16">
-      <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">Customer Testimonials</h2>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">Customer Testimonials</h2>
       <p className="text-center text-slate-600 max-w-3xl mx-auto mb-10">
         Trusted by businesses and individuals who rely on punctual, secure delivery.
       </p>

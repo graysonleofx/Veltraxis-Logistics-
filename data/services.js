@@ -3,21 +3,21 @@ const services = [
   {
     id: '1',
     title: 'Air Transportation',
-    description: 'GlobalAxis Logistics offers efficient, dependable, and eco-friendly air transport solutions for moving substantial cargo over long distances.',
+    description: 'Veltraxis Logistics delivers efficient, reliable, and eco-conscious air freight solutions for transporting large cargo across long distances.',
     image: '/assets/plane.jpg',
     icon: 'ri-plane-line'
   },
   {
     id: '2',
     title: 'Maritime Transportation',
-    description: 'GlobalAxis Logistics provides maritime transport as a key part of global trade, delivering cost-effective and efficient shipping for large volumes of goods across international waters.',
+    description: 'Veltraxis Logistics delivers cost-effective and efficient ocean freight solutions, enabling the seamless movement of large cargo volumes across global trade routes.',
     image: '/assets/ship.jpg',
     icon: 'ri-ship-line'
   },
   {
     id: '3',
     title: 'Land Transportation',
-    description: 'GlobalAxis Logistics connects businesses to customers and suppliers through reliable, flexible, and prompt land transportation services.',
+    description: 'Veltraxis Logistics connects businesses to customers and suppliers through reliable, flexible, and timely land transportation solutions.',
     image: '/assets/Trucks.jpg',
     icon: 'ri-truck-line'
   },

@@ -6,7 +6,7 @@ export default function ContactSection({ params }) {
 
   return (
     <section id="contact" className="max-w-5xl mx-auto px-4 py-14 sm:py-18">
-      <div className="bg-gradient-to-r from-cyan-600 to-slate-700 text-white rounded-3xl shadow-2xl border border-cyan-300">
+      <div className="bg-gradient-to-r from-red-primary to-bg-secondary text-white rounded-3xl shadow-2xl border border-red-primary/20 p-8 sm:p-10">
         <div className="grid md:grid-cols-2 gap-8 p-8 sm:p-10 items-center">
           <div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Get Started?</h2>
@@ -20,7 +20,7 @@ export default function ContactSection({ params }) {
           <div className="space-y-3">
             <a
               href="/#contact"
-              className="block w-full text-center rounded-full bg-white/95 text-cyan-700 font-bold px-6 py-3 hover:bg-white transition"
+              className="block w-full text-center rounded-full bg-white/95 text-red-primary font-bold px-6 py-3 hover:bg-white transition"
             >
               Contact Us
             </a>

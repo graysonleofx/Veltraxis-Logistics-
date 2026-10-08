@@ -4,14 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
   const sectionRef = useRef(null);
-
-  const slides = [
-    '/assets/hero.jpg',
-    '/assets/heroo.jpg',
-    '/assets/herooo.jpg',
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,122 +28,88 @@ export default function HeroSection() {
     };
   }, []);
 
-  useEffect(() => {
-    const autoSlide = setInterval(() => {
-      setActiveSlide((current) => (current + 1) % slides.length);
-    }, 7000);
-
-    return () => clearInterval(autoSlide);
-  }, [slides.length]);
-
   const scrollToTracking = () => {
     document.getElementById('tracking')?.scrollIntoView({ behavior: 'smooth' });
   };
+
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const goToPrevious = () => {
-    setActiveSlide((current) => (current - 1 + slides.length) % slides.length);
-  };
-
-  const goToNext = () => {
-    setActiveSlide((current) => (current + 1) % slides.length);
-  };
-
-  const goToSlide = (index) => {
-    setActiveSlide(index);
-  };
-
   return (
-    <>
-      <style jsx>{`
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        .animate-slideInRight {
-          animation: slideInRight 1s ease-out;
-        }
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-out;
-        }
-      `}</style>
-      <section
-        id="home"
-        ref={sectionRef}
-        className="min-h-screen bg-cover bg-center bg-no-repeat relative transition-all duration-700 ease-in-out"
-        style={{
-          backgroundImage: `url(${slides[activeSlide]})`,
-          top: '-98px',
-          objectFit: 'cover',
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/70 to-cyan-900/60"></div>
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-bg-main/90"
+    >
+      <div className="absolute inset-0 bg-[url('/assets/hero2.jpg')] bg-cover bg-center opacity-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-bg-main/95 via-bg-main/70 to-red-primary/40" />
 
-        <button
-          onClick={goToPrevious}
-          aria-label="Previous slide"
-          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-slate-900/50 text-white p-3 shadow-lg backdrop-blur-sm transition hover:bg-slate-900/70"
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] items-center px-4 py-24 sm:px-6 lg:px-8">
+        <div
+          className={`w-full max-w-3xl rounded-[2rem] border border-text-muted/10 bg-bg-main/70 p-8 shadow-2xl shadow-bg-main/40 backdrop-blur-lg transition duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
-          ‹
-        </button>
-
-        <button
-          onClick={goToNext}
-          aria-label="Next slide"
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-slate-900/50 text-white p-3 shadow-lg backdrop-blur-sm transition hover:bg-slate-900/70"
-        >
-          ›
-        </button>
-
-        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`h-3 w-3 rounded-full transition-all ${index === activeSlide ? 'bg-cyan-300 scale-125' : 'bg-white/60 hover:bg-white'}`}
-            />
-          ))}
-        </div>
-
-        <div className="relative top-10 z-10 container mx-auto px-4 py-20">
-          <div className="flex items-center justify-center h-[calc(100vh-150px)]">
-            <div className={` w-full max-w-4xl text-center border  p-8 shadow-2xl backdrop-blur ${isVisible ? 'animate-slideInRight' : ''}`}>
-              <h1 className={`text-4xl md:text-7xl font-bold text-white mb-6 leading-tight bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent ${isVisible ? 'animate-fadeIn' : ''}`} style={{ animationDelay: '0.2s' }}>
-                Fast, Reliable Logistics Solutions
-              </h1>
-              <p className={`text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto ${isVisible ? 'animate-fadeIn' : ''}`} style={{ animationDelay: '0.4s' }}>
-                GlobalAxis Logistics delivers excellence in freight management, warehousing, and global transportation. Experience seamless operations that drive your business forward.
-              </p>
-              <div className="flex items-center justify-center sm:flex-row gap-6">
+          <div className="space-y-6 text-center sm:text-left">
+            <p className="inline-flex items-center rounded-full bg-red-primary/10 px-4 py-2 text-sm font-semibold text-red-primary">
+              <i className="ri-truck-line mr-2 text-lg text-red-primary" />
+              Premium logistics for global commerce
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-text-white sm:text-5xl md:text-6xl">
+              Speed You Can Trust. Delivery You Can Rely On
+            </h1>
+            <p className="mx-auto max-w-2xl text-base leading-7 text-text-muted sm:mx-0 sm:text-lg">
+              We move your goods securely with advanced tracking, streamlined freight systems, and reliable support at every step
+            </p>
+            <div className="flex flex-col items-center justify-start gap-4 sm:flex-row sm:items-center">
+              <button
+                type="button"
+                onClick={scrollToTracking}
+                className="inline-flex items-center justify-center rounded-full bg-red-primary px-6 py-3 text-sm font-semibold text-text-white shadow-lg shadow-red-primary/20 transition hover:bg-red-hover"
+              >
+                Track Your Shipment
+              </button>
+              {/* <button
+                type="button"
+                onClick={scrollToContact}
+                className="inline-flex items-center justify-center rounded-full border border-text-muted bg-bg-secondary/5 px-6 py-3 text-sm font-semibold text-text-light transition hover:border-red-primary hover:text-red-primary"
+              >
+                Get a Quote
+              </button> */}
+            </div>
+            {/* <div className="mt-6 rounded-3xl border border-slate-800 bg-white/5 p-4 shadow-sm shadow-slate-950/10">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <label className="sr-only" htmlFor="tracking-input">
+                  Tracking number
+                </label>
+                <input
+                  id="tracking-input"
+                  type="text"
+                  placeholder="Enter shipment ID or tracking number"
+                  className="flex-1 rounded-full border border-slate-700 bg-slate-950/70 px-5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+                />
                 <button
-                  onClick={scrollToTracking}
-                  className={`bg-cyan-600 hover:bg-cyan-500 text-white px-8 py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 ${isVisible ? 'animate-slideInRight' : ''}`}
-                  style={{ animationDelay: '0.6s' }}
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-cyan-400"
                 >
-                  Track Your Shipment
+                  Check Status
                 </button>
+              </div>
+            </div> */}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="inline-flex items-center gap-3 rounded-3xl bg-bg-secondary/5 px-4 py-3 text-sm text-text-muted">
+                <i className="ri-shield-check-line text-red-primary text-lg" />
+                Trusted by 5,000+ businesses worldwide
+              </div>
+              <div className="inline-flex items-center gap-3 rounded-3xl bg-bg-secondary/5 px-4 py-3 text-sm text-text-muted">
+                <i className="ri-bar-chart-line text-red-primary text-lg" />
+                99.9% on-time delivery rate
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

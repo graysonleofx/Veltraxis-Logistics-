@@ -17,14 +17,14 @@ export async function POST(req) {
 
     // Send the email using Resend
     const data = await resend.emails.send({
-      from: 'Shipwide Logistics <contact-us@shipwidelogistics.online>',
+      from: 'Global Axis Logistics <contact@globalaxislogistics.online>',
       to: email,
       subject: `Your Shipment Has Been Recieved: #${trackingId}`,
       html: `
 
       <div style="background:#f6f6f6;padding:0;margin:0; width:100%; font-family:Arial,sans-serif;">
         <div style="text-align:center; padding:16px 0; background:#222;">
-          <img src="https://i.postimg.cc/V6jhwncq/brand.png" alt="Shipwide Logistics" style="height:100px; width:100px;" />
+          <img src="https://image2url.com/r2/default/images/1775221749601-1ed4da9a-8f9f-4dc9-83af-fad01deb6f03.blob" alt="Global Axis Logistics" style="height:100px; width:100px;" />
           <p style="color:#fff; margin:4px 0 0 0; font-size:14px;">Reliable Shipping & Logistics Solutions</p>
         </div>
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f6f6;padding:0;margin:0;">
@@ -34,7 +34,7 @@ export async function POST(req) {
             <tr>
             <td style="padding:32px 32px 16px 32px;text-align:center;">
               <!-- Logo Placeholder -->
-              <h2 style="font-family:Arial,sans-serif;color:#222;font-size:24px;margin:0 0 8px 0;">Shipwide Logistics</h2>
+              <h2 style="font-family:Arial,sans-serif;color:#222;font-size:24px;margin:0 0 8px 0;">Global Axis Logistics</h2>
               <p style="font-family:Arial,sans-serif;color:#555;font-size:16px;margin:0 0 24px 0;">Your shipment is on its way!</p>
             </td>
             </tr>
@@ -84,19 +84,19 @@ export async function POST(req) {
             </tr>
             <tr>
               <td style="padding:0 32px 16px 32px;">
-              <p style="font-family:Arial,sans-serif;color:#aaa;font-size:12px;margin:24px 0 0 0;">If you have any questions, feel free to contact us at <a href="mailto:contact-us@shipwidelogistics.online" style="color:#04471C;text-decoration:none;">contact-us@shipwidelogistics.online</a>.</p>
+              <p style="font-family:Arial,sans-serif;color:#aaa;font-size:12px;margin:24px 0 0 0;">If you have any questions, feel free to contact us at <a href="mailto:contact@globalaxislogistics.online" style="color:#0891b2;text-decoration:none;">contact@globalaxislogistics.online</a>.</p>
               </td>
             </tr>
             <tr>
             <td style="padding:0 32px 32px 32px;text-align:center;">
-              <a href="${shipmentDetails.trackingUrl}" style="display:inline-block;background:#04471C;color:#fff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;text-decoration:none;padding:12px 32px;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-top:16px;">
+              <a href="${shipmentDetails.trackingUrl}" style="display:inline-block;background:#0891b2;color:#fff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;text-decoration:none;padding:12px 32px;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-top:16px;">
                Access Tracking Here
               </a>
             </td>
             </tr>
             <tr>
             <td style="padding:0 32px 32px 32px;text-align:center;">
-              <p style="font-family:Arial,sans-serif;color:#aaa;font-size:12px;margin:24px 0 0 0;">&copy; ${new Date().getFullYear()} Shipwide Logistics. All rights reserved.</p>
+              <p style="font-family:Arial,sans-serif;color:#aaa;font-size:12px;margin:24px 0 0 0;">&copy; ${new Date().getFullYear()} Global Axis Logistics. All rights reserved.</p>
             </td>
             </tr>
           </table>

@@ -37,24 +37,6 @@ export default function AdminPage() {
         setIsAuthenticated(false);
         return;
       }
-
-    //   if (session?.user) {
-    //     const { data: adminData, error: userError } = await supabase
-    //       .from('Admins')
-    //       .select('role')
-    //       .eq('id', '44c00088b-babb-4187-aca4-63e643321d12')
-    //       .single();
-
-    //   if (userError) {
-    //     console.error('Error fetching admin data:', userError);
-    //     setIsAuthenticated(false);
-    //     return;
-    //   } else {
-    //     setIsAuthenticated(adminData?.role === 'admin');
-    //   }
-    // } else {
-    //     setIsAuthenticated(false);
-    //   }
   }
   checkAuth();
   }, []);

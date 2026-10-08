@@ -3,10 +3,13 @@ const config = {
   theme: {
     extend: {
       colors: {
-        primary: '#020202',
-        secondary: '#04471C',
-        accent: '#058C42',
-        background: '#16DB65',
+        'bg-main': '#0D0D0D',
+        'bg-secondary': '#111827',
+        'red-primary': '#E11D2E',
+        'red-hover': '#FF2D3D',
+        'text-white': '#FFFFFF',
+        'text-light': '#D1D5DB',
+        'text-muted': '#6B7280',
       },
     },
   },
