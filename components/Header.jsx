@@ -101,7 +101,7 @@ export default function Header() {
         <div className="fixed inset-0 z-50 bg-bg-main/60 backdrop-blur-sm md:hidden" onClick={() => setIsMenuOpen(false)}>
           <div className="absolute right-0 top-0 h-full w-72 bg-bg-secondary p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-text-white">Navigation</h2>
+              {/* <h2 className="text-lg font-semibold text-text-white"></h2> */}
               <button
                 className="p-1 rounded-md text-text-light hover:text-text-white hover:bg-bg-main"
                 onClick={() => setIsMenuOpen(false)}
