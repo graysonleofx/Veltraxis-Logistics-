@@ -2,9 +2,6 @@
 
 import { useState } from 'react';
 import  supabase  from '@/lib/supabaseClient';
-import brand from '@/public/assets/brand.png';
-
-
 export default function AdminLogin( { onLogin }) {
   const [credentials, setCredentials] = useState({
     email: '',
@@ -72,10 +69,10 @@ export default function AdminLogin( { onLogin }) {
     if (credentials.email === '' || credentials.password === '') {
       setError('Please fill in all fields');
       return;
-    } else if (credentials.email !== 'admin@globalaxislogistics.online') {
+    } else if (credentials.email !== 'admin@admin.com') {
       setError('Invalid email or password');
       return;
-    } else if (credentials.password !== '1937519375@123') {
+    } else if (credentials.password !== 'Admin@123') {
       setError('Invalid email or password');
       return;
     }
@@ -108,70 +105,66 @@ export default function AdminLogin( { onLogin }) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
-      <div className="max-w-md w-full">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i className="ri-admin-line text-cyan-500 text-2xl"></i>
+    <div className="admin-login">
+      <div className="admin-login-panel">
+        <div className="admin-login-heading">
+            <div className="admin-login-mark">
+              <i className="ri-shield-user-line"></i>
             </div>
-            <h2 className="text-2xl font-bold text-slate-800">Admin Login</h2>
-            <p className="text-gray-600 mt-2">Access the shipment management dashboard</p>
+            <p className="admin-eyebrow">Operations access</p>
+            <h2>Admin sign in</h2>
+            <p>Manage shipments and customer records.</p>
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6">
+            <div className="admin-login-error">
               <div className="flex items-center">
-                <i className="ri-error-warning-line text-red-500 text-xl mr-2"></i>
+                <i className="ri-error-warning-line"></i>
                 {error}
               </div>
             </div>
           )}
 
-          <form onSubmit={handleAdminLogin} className="space-y-6">
+          <form onSubmit={handleAdminLogin} className="admin-login-form">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <label htmlFor="admin-email">Email address</label>
               <input
-                type="text"
+                id="admin-email"
+                type="email"
                 name="email"
                 value={credentials.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                autoComplete="username"
                 placeholder="Enter email"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <label htmlFor="admin-password">Password</label>
               <input
+                id="admin-password"
                 type="password"
                 name="password"
                 value={credentials.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                autoComplete="current-password"
                 placeholder="Enter password"
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
-            >
+            <button type="submit" disabled={isLoading}>
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <i className="ri-loader-4-line animate-spin mr-2"></i>
+                  <i className="ri-loader-4-line animate-spin"></i>
                   Signing In...
                 </div>
               ) : (
-                'Sign In'
+                <><span>Sign in</span><i className="ri-arrow-right-line" /></>
               )}
             </button>
           </form>
-
-        </div>
       </div>
     </div>
   );

@@ -498,7 +498,7 @@ export default function AdminDashboard({ onLogout }) {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="admin-dashboard container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-slate-800">Admin Dashboard</h1>
         <button
@@ -510,7 +510,7 @@ export default function AdminDashboard({ onLogout }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {userStats.map((stat, index) => (
           <div key={index} className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between">
@@ -547,7 +547,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('users')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'users'
-                  ? 'border-cyan-500 text-cyan-500'
+                  ? 'border-red-primary text-red-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -557,7 +557,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('overview')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'overview'
-                  ? 'border-cyan-500 text-cyan-500'
+                  ? 'border-red-primary text-red-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -567,7 +567,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('register')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'register'
-                  ? 'border-cyan-500 text-cyan-500'
+                  ? 'border-red-primary text-red-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -577,7 +577,7 @@ export default function AdminDashboard({ onLogout }) {
               onClick={() => setActiveTab('create')}
               className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap cursor-pointer ${
                 activeTab === 'create'
-                  ? 'border-cyan-500 text-cyan-500'
+                  ? 'border-red-primary text-red-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -911,7 +911,7 @@ export default function AdminDashboard({ onLogout }) {
 
                 <button
                   type="submit"
-                  className="bg-cyan-500 hover:scale-105 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  className="bg-red-primary hover:bg-red-hover hover:scale-105 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <i className="ri-add-line mr-2"></i>
                   Create Shipment

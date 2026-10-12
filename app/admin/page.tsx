@@ -4,7 +4,6 @@ import { useState, useEffect,useCallback } from 'react';
 import Link from 'next/link';
 import AdminLogin from './AdminLogin.jsx';
 import AdminDashboard from './AdminDashboard.jsx';
-import TopHeader from '@/components/TopHeader.jsx';
 import  supabase  from '@/lib/supabaseClient.js';
 import brand from '@/public/assets/logo.png';
 import Image from 'next/image.js';
@@ -55,26 +54,30 @@ export default function AdminPage() {
   // Render the admin page
 
   return (
-    <>
-      <TopHeader/>
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm border-b">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-                <Image src={brand} alt="GlobalAxis Logistics" style={{objectFit: "contain", height: "100px", width: "100px"}} />
-              </Link>
-              <span className="text-secondary font-medium">Admin Portal</span>
-            </div>
+    <main className="admin-shell min-h-screen">
+      <header className="admin-header">
+        <div className="admin-header-inner">
+          <Link href="/" className="admin-brand">
+            <span className="admin-brand-mark">
+              <Image src={brand} alt="Veltraxis Logistics" fill priority sizes="56px" />
+            </span>
+            <span className="admin-brand-copy">
+              <strong>Veltraxis Logistics</strong>
+              <small>Driven by Speed. Defined by Trust.</small>
+            </span>
+          </Link>
+          <div className="admin-header-actions">
+            <span className="admin-portal-label"><i className="ri-shield-user-line" /> Admin Portal</span>
+            <Link href="/" className="admin-home-link"><i className="ri-arrow-left-line" /> <span>Back to site</span></Link>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {!isAuthenticated ? (
-          <AdminLogin onLogin={handleLogin} />
-        ) : (
-            <AdminDashboard onLogout={handleLogout} />
-        )}
-      </div>
-    </>
+      {!isAuthenticated ? (
+        <AdminLogin onLogin={handleLogin} />
+      ) : (
+        <AdminDashboard onLogout={handleLogout} />
+      )}
+    </main>
   );
 }
