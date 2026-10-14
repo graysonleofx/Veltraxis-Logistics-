@@ -313,7 +313,7 @@ export default function AdminDashboard({ onLogout }) {
       to: newShip.to,
       estimatedDelivery: newShip.estimatedDelivery,
       status: newShip.status,
-      trackingUrl: `https://globalaxislogistics.online/#tracking/`
+      trackingUrl: `https://veltraxislogistics.online/#tracking/`
     }
 
     try{
@@ -326,12 +326,21 @@ export default function AdminDashboard({ onLogout }) {
           shipmentDetails: shipmentDetails
         })
       });
-      const result = await res.json();
-      if(result.success){
+      const responseText = await res.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        result = { success: false, error: 'The email service returned an unexpected response.' };
+        console.error('Unexpected email API response:', responseText);
+      }
+
+      if (res.ok && result.success) {
         console.log('Email sent successfully:', result);
-        alert('Email notification sent successfully!');
+        alert('Email receipt sent successfully!');
       }else{
         console.error('Error sending email:', result);
+        alert(`Shipment created, but its email notification failed: ${result.error || 'Please check the server logs.'}`);
       }
     } catch (error) {
       console.error('Error sending email:', error);

@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req) {
   // CORS headers
   const headers = {
@@ -17,7 +15,17 @@ export async function POST(req) {
       return new Response(JSON.stringify({ success: false, error: 'Name, email, and message are required.' }), { status: 400, headers });
     }
 
-    const data = await resend.emails.send({
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Email sending is not configured. Add RESEND_API_KEY to the server environment and restart the app.'
+      }), { status: 503, headers });
+    }
+
+    const resend = new Resend(apiKey);
+
+    const { data, error } = await resend.emails.send({
       from: 'GlobalAxis Logistics Contact-US <contact@globalaxislogistics.online>',
       to: ['contact@globalaxislogistics.online'],
       subject: subject || 'New Contact Message',
@@ -32,6 +40,14 @@ export async function POST(req) {
         <br>
       `
     });
+
+    if (error) {
+      console.error('Resend rejected contact email:', error);
+      return new Response(JSON.stringify({
+        success: false,
+        error: error.message || 'The email provider rejected the message.'
+      }), { status: 502, headers });
+    }
 
     console.log('Resend  Response:', data);
 
