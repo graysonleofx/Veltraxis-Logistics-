@@ -106,7 +106,9 @@ export default function AdminDashboard({ onLogout }) {
     to: '',
     estimatedDelivery: '',
     description: '',
-    weight: ''
+    weight: '',
+    packagePrice: '',
+    currency: 'USD'
   });
 
   const generateTrackingId = () => {
@@ -260,6 +262,8 @@ export default function AdminDashboard({ onLogout }) {
       receiverEmail: selectedUser,
       description: newShipment.description,
       weight: newShipment.weight,
+      packagePrice: Number(newShipment.packagePrice),
+      currency: newShipment.currency,
       from: newShipment.from,
       to: newShipment.to,
       status: 'Processing',
@@ -285,6 +289,8 @@ export default function AdminDashboard({ onLogout }) {
       receiverEmail: '',
       description: '',
       weight: '',
+      packagePrice: '',
+      currency: 'USD',
       from: '',
       to: '',
       estimatedDelivery: '',
@@ -309,6 +315,8 @@ export default function AdminDashboard({ onLogout }) {
       receiverEmail: newShip.receiverEmail,
       description: newShip.description,
       weight: newShip.weight,
+      packagePrice: newShip.packagePrice,
+      currency: newShip.currency,
       from: newShip.from,
       to: newShip.to,
       estimatedDelivery: newShip.estimatedDelivery,
@@ -913,6 +921,39 @@ export default function AdminDashboard({ onLogout }) {
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
                     />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Package Price</label>
+                    <input
+                      type="number"
+                      name="packagePrice"
+                      value={newShipment.packagePrice}
+                      onChange={handleInputChange}
+                      min="0"
+                      step="0.01"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Currency</label>
+                    <select
+                      name="currency"
+                      value={newShipment.currency}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none text-sm"
+                    >
+                      <option value="USD">USD ($)</option>
+                      <option value="EUR">EUR (€)</option>
+                      <option value="GBP">GBP (£)</option>
+                      <option value="CAD">CAD ($)</option>
+                      <option value="AUD">AUD ($)</option>
+                    </select>
                   </div>
                 </div>
 

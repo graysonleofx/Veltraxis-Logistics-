@@ -41,6 +41,18 @@ export async function POST(req) {
     const receiptDate = new Intl.DateTimeFormat('en-US', {
       dateStyle: 'long',
     }).format(new Date());
+    const currency = ['USD', 'EUR', 'GBP', 'CAD', 'AUD'].includes(shipmentDetails.currency)
+      ? shipmentDetails.currency
+      : 'USD';
+    const packagePrice = Number(shipmentDetails.packagePrice);
+    const formattedPackagePrice = Number.isFinite(packagePrice)
+      ? new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }).format(packagePrice)
+      : '—';
     const trackingCode = escapeHtml(trackingId);
     const safeTrackingUrl = (() => {
       try {
@@ -56,6 +68,7 @@ export async function POST(req) {
       ['Shipment status', shipmentDetails.status],
       ['Description', shipmentDetails.description],
       ['Package weight', shipmentDetails.weight],
+      ['Package price', formattedPackagePrice],
       ['Estimated delivery', shipmentDetails.estimatedDelivery],
     ].map(([label, value]) => `
       <tr>
